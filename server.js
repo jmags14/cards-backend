@@ -31,7 +31,11 @@ app.get('/api/ping', (req, res) => {
 });
 */
 
+// Convenience redirect so tools can find the spec at the site root
+app.get('/openapi.yaml', (req, res) => res.redirect('/api/docs/openapi.yaml'));
 
+// Every API route lives under /api and is defined in ./routes
+app.use('/api', apiRouter);
 
 // Must come after all routes: unknown routes, then the central error handler
 app.use(notFound);     //nothing matched 404
